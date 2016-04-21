@@ -11,33 +11,35 @@ testFile = Archivo "tesths" " palabra inicio ... palabra\n           \n... fin"
 --Para ejecutar :l tpgrupal
 --tamaño de un archivo en bytes
 tamanio :: Archivo -> Int
-tamanio file = (*8) (length (contenido file))
+tamanio file = (*8).length.contenido $ file
 
--- OK, pero yo usaría composición
+-- OK, pero yo usaría composición // corregido
 
 --archivo está vacío
 esvacio :: Archivo -> Bool
-esvacio file = null (contenido file)
+esvacio file = null.contenido $ file
 
--- OK pero usaría composición
+-- OK pero usaría composición // corregido 
 
 --cantidad de líneas de un archivo
 cantidadlineas :: Archivo -> Int
-cantidadlineas file = length (lines (contenido file))
+cantidadlineas file = length.lines.contenido $ file
 
 -- IDEM ANTERIOR
 
 --líneas del archivo es blanca
 lineablanca :: Archivo -> Bool
-lineablanca file = any (\x -> all (isSpace) x) (lines (contenido file))
+--codigo anterior : lineablanca file = any (\x -> all (isSpace) x) (lines (contenido file))
+lineablanca file = (any (\x -> all (isSpace) x)).lines.contenido $ file
 
--- IDEM ANTERIOR
+-- IDEM ANTERIOR // corregido
 
 --archivo es de extensión .hs
 extensionhs :: Archivo -> Bool
-extensionhs file = (intersect  ".hs" (nombre file)) == ".hs" --en revision
+--codigo anterior : extensionhs file = (intersect  ".hs" (nombre file)) == ".hs" --en revision
+extensionhs file = (==".hs").(intersect ".hs").nombre $ file
 
--- IDEM ANTERIOR
+-- IDEM ANTERIOR // corregido
 
 --Renombrar un archivo
 type Modificacion = Archivo -> Archivo
