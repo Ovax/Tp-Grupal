@@ -88,6 +88,7 @@ cortarlinea linea = take 4 linea : cortarlinea (drop 4 linea)
 
 --Saber si una modificación es inútil
 esnecesario :: Archivo -> String -> String
-esnecesario file content = if (contenido file) == content then "Es una modificacion inutil" else "Modificacion necesaria"
+esnecesario file content | (==content).contenido $ file = "Es una modificacion inutil"
+                         | otherwise = "Modificacion necesaria"
 
 --lines . contenido $ wrappeararchivo unTpGrupal 
